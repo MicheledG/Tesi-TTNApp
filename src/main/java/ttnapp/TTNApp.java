@@ -19,6 +19,9 @@ import org.thethingsnetwork.data.mqtt.Client;
  */
 public class TTNApp {
 	
+	private static final String DEFAULT_REGION = "eu";
+	private static final String DEFAULT_APPID = "testing-lorawan-mdg";
+	private static final String DEFAULT_ACCESSKEY = "ttn-account-v2._Hr9svW80OV4eEJeeNPD0sWriSOeLYXfe9Jyypeo_Lc"; 
 	private static final String LINE_SEPARATOR = "==============================";
 	private static final String LOG_FILE_FOLDER ="log";
 	private static final String LOG_FILE_NAME_PREFIX = "log";
@@ -70,9 +73,9 @@ public class TTNApp {
 	
     public static void main(String[] args) throws Exception {
         
-    	String region = System.getenv("region");
-        String appId = System.getenv("appId");
-        String accessKey = System.getenv("accessKey");
+    	String region = System.getenv("region") != null ? System.getenv("region") : DEFAULT_REGION;
+        String appId = System.getenv("appId") != null ? System.getenv("appId") : DEFAULT_APPID;
+        String accessKey = System.getenv("accessKey") != null ? System.getenv("accessKey") : DEFAULT_ACCESSKEY;
 
         Client client = new Client(region, appId, accessKey);
         
