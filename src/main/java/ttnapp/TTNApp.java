@@ -3,8 +3,6 @@ package ttnapp;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import org.thethingsnetwork.data.common.Connection;
 import org.thethingsnetwork.data.common.messages.ActivationMessage;
@@ -26,7 +24,6 @@ public class TTNApp {
 	private static final String LOG_FILE_FOLDER ="log";
 	private static final String LOG_FILE_NAME_PREFIX = "log";
 	private static final String LOG_FILE_NAME_SUFFIX = ".dat";
-	private final static DateFormat DEFAULT_TIMESTAMP_FORMAT = new SimpleDateFormat("yyyyMMdd-HHmmssS");
 	
 	private static void onConnectedEventHandler(Connection _client){
 		System.out.println(LINE_SEPARATOR);
@@ -108,11 +105,11 @@ public class TTNApp {
 		for(byte b:rawPayload){
 			rawPayloadString.append(String.format("%02X", b));
 		}
-		//double rssi = uplinkMessage.getMetadata().getGateways().get(0).getRssi();
-		//double snr = uplinkMessage.getMetadata().getGateways().get(0).getSnr();
+		double rssi = uplinkMessage.getMetadata().getGateways().get(0).getRssi();
+		double snr = uplinkMessage.getMetadata().getGateways().get(0).getSnr();
 				
-		//printWriter.format("%s\t%s\t%d\t%s\t%f\t%f\t%f\t%s\n", timestamp, devId, counter, dataRate, frequency, rssi, snr, rawPayloadString);		
-		printWriter.format("%s\t%s\t%d\t%s\t%f\t%s\n", timestamp, devId, counter, dataRate, frequency, rawPayloadString);
+		printWriter.format("%s\t%s\t%d\t%s\t%f\t%f\t%f\t%s\n", timestamp, devId, counter, dataRate, frequency, rssi, snr, rawPayloadString);		
+		//printWriter.format("%s\t%s\t%d\t%s\t%f\t%s\n", timestamp, devId, counter, dataRate, frequency, rawPayloadString);
 		
 		printWriter.close();		
     	
