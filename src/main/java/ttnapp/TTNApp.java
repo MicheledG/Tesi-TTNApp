@@ -44,8 +44,11 @@ public class TTNApp {
 		UplinkMessage uplinkMessage = (UplinkMessage) data;
 	
 		System.out.println(LINE_SEPARATOR);
+		System.out.println("Message timestamp: " + uplinkMessage.getMetadata().getGateways().get(0).getTime());
 		System.out.println("Message from: " + devId);
 		System.out.println("Message counter: " + uplinkMessage.getCounter());
+		System.out.println("Message RSSI: " + uplinkMessage.getMetadata().getGateways().get(0).getRssi());
+		System.out.println("Message SNR: " + uplinkMessage.getMetadata().getGateways().get(0).getSnr());
 		System.out.println("Message fields:");
 		for (String fieldName: uplinkMessage.getPayloadFields().keySet()) {
 			System.out.println("- "+fieldName+": "+ uplinkMessage.getPayloadFields().get(fieldName));
